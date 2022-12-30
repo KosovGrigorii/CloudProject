@@ -4,7 +4,7 @@ info:
   version: 0.1.0
 
 x-yc-apigateway:
-  service_account_id: ajeua5h6514rthp61jqf
+  service_account_id: ${MOVIES_API_SA_ID}
 
 paths:
   /{file+}:
@@ -40,7 +40,7 @@ paths:
                 "$ref": "#/components/schemas/Info"
       x-yc-apigateway-integration:
         type: serverless_containers
-        container_id: bbaulho4ijde58con4nr
+        container_id: ${MOVIES_API_CONTAINER_ID}
   "/movies":
     get:
       summary: Returns all movies
@@ -54,7 +54,7 @@ paths:
                 "$ref": "#/components/schemas/MovieList"
       x-yc-apigateway-integration:
         type: serverless_containers
-        container_id: bbaulho4ijde58con4nr
+        container_id: ${MOVIES_API_CONTAINER_ID}
   "/movie/{id}":
     parameters:
       - name: id
@@ -75,7 +75,7 @@ paths:
                 $ref: '#/components/schemas/Movie'
       x-yc-apigateway-integration:
         type: serverless_containers
-        container_id: bbaulho4ijde58con4nr
+        container_id: ${MOVIES_API_CONTAINER_ID}
     delete:
       description: deletes a single movie based on the ID supplied
       operationId: deleteMovieById
@@ -84,7 +84,7 @@ paths:
           description: movie deleted
       x-yc-apigateway-integration:
         type: serverless_containers
-        container_id: bbaulho4ijde58con4nr
+        container_id: ${MOVIES_API_CONTAINER_ID}
   "/movie":
     post:
       summary: Post movie
@@ -105,7 +105,7 @@ paths:
                 "$ref": "#/components/schemas/Movie"
       x-yc-apigateway-integration:
         type: serverless_containers
-        container_id: bbaulho4ijde58con4nr
+        container_id: ${MOVIES_API_CONTAINER_ID}
 components:
   schemas:
     Movie:
