@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        localStorage["url_path"] = "https://d5dvksglklano1pbp03s.apigw.yandexcloud.net";
+        localStorage["url_path"] = ${MOVIES_API_GATEWAY_DOMAIN};
 
         window.fetch('package.json')
             .then( response => response.json())
