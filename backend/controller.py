@@ -1,11 +1,7 @@
 from boto3 import resource
 import os
 from boto3.dynamodb.conditions import Key
-
-DB_URL = "https://docapi.serverless.yandexcloud.net/ru-central1/b1ge32nfqaa79q02sin5/etnglk9s144ktho1kgr7"
-REGION = "ru-central1"
-ACCESS_ID = "YCAJE3OqkNvMy107cAzIyjjqf"
-ACCESS_KEY = "YCMDHzGuHl52u5J23EazrIuvEYCljpBZOAN4vz68" #os.environ.get("ACCESS_KEY")
+from config import DB_URL, REGION, ACCESS_ID, ACCESS_KEY
 
 
 resource = resource('dynamodb',

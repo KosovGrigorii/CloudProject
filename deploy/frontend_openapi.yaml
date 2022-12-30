@@ -1,0 +1,28 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Movies Website
+x-yc-apigateway:
+  service_account_id: ajeua5h6514rthp61jqf
+
+paths:
+  /:
+    get:
+      operationId: index
+      x-yc-apigateway-integration:
+        type: object_storage
+        bucket: "movies-website-b1ghbrp8fpp59522per5"
+        object: 'Home.html'
+  /{file+}:
+    get:
+      operationId: website
+      parameters:
+        - name: file
+          in: path
+          required: false
+          schema:
+            type: string
+      x-yc-apigateway-integration:
+        type: object_storage
+        bucket: "movies-website-b1ghbrp8fpp59522per5"
+        object: '{file}'

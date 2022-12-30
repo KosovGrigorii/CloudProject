@@ -14,17 +14,11 @@
         <a onclick="window.location.href='AlterButton.html'">All Films </a>
     </p>
     <script>
-        window.fetch('version.json')
-            .then( response => response.json())
-            .then( data => {
-                const appVersion = data.version;
-                console.log(appVersion);
-                var html = "";
-                html +=  "<p>Frontend version:"+appVersion+"</p>";
-                document.getElementsByClassName("base-info")[0].innerHTML = html;
-            });
+        var html = "";
+        html +=  "<p>Frontend version:"+localStorage["version"]+"</p>";
+        document.getElementsByClassName("base-info")[0].innerHTML = html;
 
-        window.fetch(localStorage["url_path"] + 'info')
+        window.fetch(localStorage["url_path"] + '/info')
             .then(response => response.json())
             .then( data => {
                 const appVersion = data.version;

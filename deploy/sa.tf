@@ -14,3 +14,12 @@ resource "yandex_iam_service_account_static_access_key" "movies_api_sa_static_ke
 output "movies_api_sa_id" {
   value = yandex_iam_service_account.movies_api_sa.id
 }
+
+output "access_key" {
+  value = yandex_iam_service_account_static_access_key.movies_api_sa_static_key.access_key
+}
+
+output "private_key" {
+  value = yandex_iam_service_account_static_access_key.movies_api_sa_static_key.secret_key
+  sensitive = true
+}

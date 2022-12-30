@@ -15,7 +15,7 @@
             const director = e.director.value;
             const movie = { title, director, id };
             console.log(JSON.stringify(movie));
-            fetch(localStorage["url_path"] + 'movie', {
+            fetch(localStorage["url_path"] + '/movie', {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(movie)

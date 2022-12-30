@@ -7,7 +7,13 @@
 </head>
 <body>
     <script>
-        localStorage["url_path"] = "https://bbarfohvugf7sfh6u070.containers.yandexcloud.net/"
+        localStorage["url_path"] = "https://d5dvksglklano1pbp03s.apigw.yandexcloud.net";
+
+        window.fetch('package.json')
+            .then( response => response.json())
+            .then( data => {
+                localStorage["version"] = data.version;
+            });
         function goPersInfo(id) {
             localStorage["id"] = id.id;
             window.location.href='MovieDetails.html';
@@ -21,17 +27,11 @@
             <a onclick="window.location.href='Home.html'">All Films </a>
         </p>
         <script>
-            window.fetch('version.json')
-                .then( response => response.json())
-                .then( data => {
-                    const appVersion = data.version;
-                    console.log(appVersion);
-                    var html = "";
-                    html +=  "<p>Frontend version:"+appVersion+"</p>";
-                    document.getElementsByClassName("base-info")[0].innerHTML = html;
-                });
+            var html = "";
+            html +=  "<p>Frontend version:"+localStorage["version"]+"</p>";
+            document.getElementsByClassName("base-info")[0].innerHTML = html;
 
-            window.fetch(localStorage["url_path"] + 'info')
+            window.fetch(localStorage["url_path"] + '/info')
                 .then(response => response.json())
                 .then( data => {
                     const appVersion = data.version;
@@ -47,7 +47,7 @@
 
     <div class="movie-list"></div>
     <script>
-        window.fetch(localStorage["url_path"] + "movies",
+        window.fetch(localStorage["url_path"] + "/movies",
             { method: 'GET'})
             .then( response => response.json())
             .then(data => {
