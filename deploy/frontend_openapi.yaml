@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: Movies Website
 x-yc-apigateway:
-  service_account_id: ajeua5h6514rthp61jqf
+  service_account_id: ${MOVIES_API_SA_ID}
 
 paths:
   /:
@@ -11,7 +11,7 @@ paths:
       operationId: index
       x-yc-apigateway-integration:
         type: object_storage
-        bucket: "movies-website-b1ghbrp8fpp59522per5"
+        bucket: ${MOVIES_WEBSITE_BUCKET}
         object: 'Home.html'
   /{file+}:
     get:
@@ -24,5 +24,5 @@ paths:
             type: string
       x-yc-apigateway-integration:
         type: object_storage
-        bucket: "movies-website-b1ghbrp8fpp59522per5"
+        bucket: ${MOVIES_WEBSITE_BUCKET}
         object: '{file}'
