@@ -1,8 +1,7 @@
-import json
-
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify
 import controller as dynamodb
 from flask_cors import CORS, cross_origin
+from config import BACKEND_VERSION
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -30,10 +29,8 @@ def root_route():
 
 @app.route('/info')
 def get_info():
-    with open('versions.json') as f:
-        data = json.load(f)
-        data['replica'] = replica_id
-        return jsonify(data)
+    data = {'replica': replica_id, 'version': BACKEND_VERSION}
+    return jsonify(data)
 
 
 @app.route('/movie', methods=['POST'])
@@ -53,9 +50,6 @@ def add_movie():
 @app.route('/movie/<movie_id>', methods=['GET'])
 def get_movie(movie_id):
     response = dynamodb.read_from_movie(movie_id)
-    # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-    # print(response.headers)
-    # return response
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if 'Item' in response:
             return {'Item': response['Item']}
@@ -70,16 +64,10 @@ def get_movie(movie_id):
 @cross_origin(origins='https://project-backet.website.yandexcloud.net/')
 def get_movies():
     response = dynamodb.read_movies()
-    # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-    # print(response.headers)
-    # return response
-    # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-    # return response
 
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if 'Items' in response:
             return {'Items': response['Items']}
-            # return {'Items': response['Items']}
         return {'msg': 'Item not found!'}
     return {
         'msg': 'Some error occured',

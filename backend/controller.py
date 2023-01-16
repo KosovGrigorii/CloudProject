@@ -1,6 +1,4 @@
 from boto3 import resource
-import os
-from boto3.dynamodb.conditions import Key
 from config import DB_URL, REGION, ACCESS_ID, ACCESS_KEY
 
 
@@ -76,9 +74,9 @@ ReplicaTable = resource.Table('Replica')
 def get_replica_val():
 
     response = ReplicaTable.update_item(Key={'key': 0},
-                             ReturnValues="UPDATED_NEW",
-                             ExpressionAttributeValues={":inc": 1},
-                             UpdateExpression='ADD value :inc',)
+                                        ReturnValues="UPDATED_NEW",
+                                        ExpressionAttributeValues={":inc": 1},
+                                        UpdateExpression='ADD value :inc',)
     return response['Attributes'].get('value', 0)
 
 
